@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public int coinValue = 1;
+    [SerializeField] private int _coinValue = 1;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        Inventory inventory = other.GetComponent<Inventory>();
+
+        if (inventory != null)
         {
-            // Увеличиваем счёт (можно через GameManager или напрямую)
-            CoinCounter.instance.AddCoins(coinValue);
+            inventory.AddCoin(_coinValue);
             Destroy(gameObject);
         }
     }

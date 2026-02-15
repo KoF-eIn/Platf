@@ -2,33 +2,28 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    public Transform leftLimit;
-    public Transform rightLimit;
-    public float speed = 3f;
+    [SerializeField] private Transform _leftLimit;
+    [SerializeField] private Transform _rightLimit;
 
-    private bool movingRight = true;
+    [SerializeField] private float _speed = 3f;
 
-    void Update()
+    private bool _movingRight = true;
+
+    private void Update()
     {
-        if (movingRight)
+        if (_movingRight)
         {
-            transform.position = Vector2.MoveTowards(transform.position, rightLimit.position, speed * Time.deltaTime);
-            if (Vector2.Distance(transform.position, rightLimit.position) < 0.1f)
-                movingRight = false;
+            transform.position = Vector2.MoveTowards(transform.position, _rightLimit.position, _speed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, _rightLimit.position) < 0.1f)
+                _movingRight = false;
         }
         else
         {
-            transform.position = Vector2.MoveTowards(transform.position, leftLimit.position, speed * Time.deltaTime);
-            if (Vector2.Distance(transform.position, leftLimit.position) < 0.1f)
-                movingRight = true;
-        }
-    }
+            transform.position = Vector2.MoveTowards(transform.position, _leftLimit.position, _speed * Time.deltaTime);
 
-    // Опционально: поворот спрайта в зависимости от направления
-    private void Flip()
-    {
-        Vector3 scaler = transform.localScale;
-        scaler.x *= -1;
-        transform.localScale = scaler;
+            if (Vector2.Distance(transform.position, _leftLimit.position) < 0.1f)
+                _movingRight = true;
+        }
     }
 }

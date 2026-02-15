@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
-    public GameObject coinPrefab;
-    public Transform[] spawnPoints;
+    [SerializeField] private GameObject _coinPrefab;
 
-    void Start()
+    [SerializeField] private Transform[] _spawnPoints;
+
+    private void Start()
     {
-        foreach (Transform point in spawnPoints)
+        if (_coinPrefab == null) return;
+
+        foreach (Transform point in _spawnPoints)
         {
-            Instantiate(coinPrefab, point.position, Quaternion.identity);
+            Instantiate(_coinPrefab, point.position, Quaternion.identity);
         }
     }
 }
