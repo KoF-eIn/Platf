@@ -10,13 +10,7 @@ public class PlayerAnimator : MonoBehaviour
 {
     private Animator _animator;
 
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
+    private void Awake() => _animator = GetComponent<Animator>();
 
-    public void UpdateSpeed(float speed)
-    {
-        _animator.SetFloat(PlayerAnimatorData.Speed, speed);
-    }
+    public void UpdateSpeed(float speed) => _animator.SetFloat(PlayerAnimatorData.Speed, speed);
 }

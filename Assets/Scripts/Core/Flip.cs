@@ -6,21 +6,14 @@ public class Flip : MonoBehaviour
 
     private bool _facingRight = true;
 
-    private void Awake()
-    {
-        _transform = transform;
-    }
+    private void Awake() => _transform = transform;
 
     public void UpdateDirection(float horizontalInput)
     {
         if (horizontalInput > 0 && !_facingRight)
-        {
             Flipp();
-        }
         else if (horizontalInput < 0 && _facingRight)
-        {
             Flipp();
-        }
     }
 
     private void Flipp()

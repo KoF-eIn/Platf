@@ -12,8 +12,6 @@ public class Inventory : MonoBehaviour
         _totalCoins += value;
 
         if (_coinText != null)
-        {
-            _coinText.text = "Coins: " + _totalCoins.ToString();
-        }
+            _coinText.text = "Coins: " + _totalCoins;
     }
 }

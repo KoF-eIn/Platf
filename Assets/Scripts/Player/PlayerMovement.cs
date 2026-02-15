@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
 
-    private Flip _flipController;
+    private Flip _flip;
 
     private PlayerAnimator _playerAnimator;
 
@@ -26,36 +26,27 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _flipController = GetComponent<Flip>();
+        _flip = GetComponent<Flip>();
         _playerAnimator = GetComponent<PlayerAnimator>();
     }
 
-    private void OnEnable()
-    {
-        _inputService.JumpPressed += OnJumpPressed;
-    }
-
-    private void OnDisable()
-    {
-        _inputService.JumpPressed -= OnJumpPressed;
-    }
+    private void OnEnable() => _inputService.JumpPressed += OnJumpPressed;
+    private void OnDisable() => _inputService.JumpPressed -= OnJumpPressed;
 
     private void OnJumpPressed()
     {
         _isGrounded = Physics2D.OverlapCircle(_groundCheckPoint.position, _groundCheckRadius, _groundLayer);
 
         if (_isGrounded)
-        {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
-        }
     }
 
     private void FixedUpdate()
     {
         float horizontal = _inputService.Horizontal;
-        _rigidbody.velocity = new Vector2(horizontal * _moveSpeed, _rigidbody.velocity.y);
 
-        _flipController.UpdateDirection(horizontal);
+        _rigidbody.velocity = new Vector2(horizontal * _moveSpeed, _rigidbody.velocity.y);
+        _flip.UpdateDirection(horizontal);
         _playerAnimator.UpdateSpeed(Mathf.Abs(horizontal));
     }
 
