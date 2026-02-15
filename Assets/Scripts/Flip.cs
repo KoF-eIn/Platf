@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerFlip : MonoBehaviour
+public class Flip : MonoBehaviour
 {
     private Transform _transform;
 
@@ -15,15 +15,15 @@ public class PlayerFlip : MonoBehaviour
     {
         if (horizontalInput > 0 && !_facingRight)
         {
-            Flip();
+            Flipp();
         }
         else if (horizontalInput < 0 && _facingRight)
         {
-            Flip();
+            Flipp();
         }
     }
 
-    private void Flip()
+    private void Flipp()
     {
         _facingRight = !_facingRight;
         _transform.Rotate(0f, 180f, 0f);

@@ -1,9 +1,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(PlayerFlip))]
+[RequireComponent(typeof(Flip))]
 [RequireComponent(typeof(PlayerAnimator))]
-
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputService _inputService;
@@ -18,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
 
-    private PlayerFlip _playerFlip;
+    private Flip _flipController;
 
     private PlayerAnimator _playerAnimator;
 
@@ -27,15 +26,25 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _playerFlip = GetComponent<PlayerFlip>();
+        _flipController = GetComponent<Flip>();
         _playerAnimator = GetComponent<PlayerAnimator>();
     }
 
-    private void Update()
+    private void OnEnable()
+    {
+        _inputService.JumpPressed += OnJumpPressed;
+    }
+
+    private void OnDisable()
+    {
+        _inputService.JumpPressed -= OnJumpPressed;
+    }
+
+    private void OnJumpPressed()
     {
         _isGrounded = Physics2D.OverlapCircle(_groundCheckPoint.position, _groundCheckRadius, _groundLayer);
 
-        if (_inputService.JumpPressed && _isGrounded)
+        if (_isGrounded)
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
         }
@@ -46,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = _inputService.Horizontal;
         _rigidbody.velocity = new Vector2(horizontal * _moveSpeed, _rigidbody.velocity.y);
 
-        _playerFlip.UpdateDirection(horizontal);
+        _flipController.UpdateDirection(horizontal);
         _playerAnimator.UpdateSpeed(Mathf.Abs(horizontal));
     }
 
