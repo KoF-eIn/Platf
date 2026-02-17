@@ -4,13 +4,14 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private InputService _inputService;
+
     [SerializeField] private float _attackRange = 1.5f;
+    [SerializeField] private float _attackCooldown = 0.5f;
 
     [SerializeField] private int _damage = 20;
 
-    [SerializeField] private float _attackCooldown = 0.5f;
-
     private float _lastAttackTime;
+
     private Transform _transform;
 
     private void Awake() => _transform = transform;
@@ -34,6 +35,7 @@ public class PlayerCombat : MonoBehaviour
                 {
                     enemyHealth.TakeDamage(_damage);
                     _lastAttackTime = Time.time;
+
                     break;
                 }
             }

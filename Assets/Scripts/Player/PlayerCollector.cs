@@ -1,16 +1,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
-[RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(Health))]
 public class PlayerCollector : MonoBehaviour
 {
-    private Inventory _inventory;
+    private PlayerInventory _inventory;
     private Health _health;
 
     private void Awake()
     {
-        _inventory = GetComponent<Inventory>();
+        _inventory = GetComponent<PlayerInventory>();
         _health = GetComponent<Health>();
     }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private Text _coinText;
 
