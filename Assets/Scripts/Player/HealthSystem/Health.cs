@@ -20,10 +20,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (_currentHealth <= 0)
-        {
-            return;
-        }
+        if (_currentHealth <= 0) return;
 
         _currentHealth = Mathf.Max(0, _currentHealth - amount);
         HealthChanged?.Invoke(_currentHealth);
@@ -36,10 +33,7 @@ public class Health : MonoBehaviour
 
     public void Heal(int amount)
     {
-        if (_currentHealth <= 0)
-        {
-            return;
-        }
+        if (_currentHealth <= 0) return;
 
         _currentHealth = Mathf.Min(_maxHealth, _currentHealth + amount);
         HealthChanged?.Invoke(_currentHealth);
